@@ -66,7 +66,7 @@ def parse_net():
             print("found one")
     print(alldevices)
     for i in range(0,len(alldevices)):
-       
+        try:
             f = open("notes.dat", mode="r+")
             for line in f:
                 if line != "\n":
@@ -74,7 +74,10 @@ def parse_net():
                         notestr = line.split(' ',1)[1]
                     else : notestr = " - "
                     iplist.add_item(alldevices[i],notestr)
-        
+        except IOError:
+            notestr = " - "
+            iplist.add_item(alldevices[i],notestr)
+           
     iplist.place(x=150,y=5,anchor=NW)
 
 
