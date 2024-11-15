@@ -4,15 +4,6 @@ import kthread #pip install kthread
 from time import sleep
 import subprocess
 import re
-def connect(hostname, port):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    socket.setdefaulttimeout(1)
-    result = sock.connect_ex((hostname, port))
-    sock.close()
-    return result == 0
-
-
-
 set_appearance_mode("dark")
 set_default_color_theme("dark-blue")
 
