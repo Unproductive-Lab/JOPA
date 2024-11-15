@@ -8,7 +8,7 @@ set_appearance_mode("dark")
 set_default_color_theme("dark-blue")
 
 root = CTk()
-root.geometry("470x200")
+root.geometry("600x200")
 root.geometry("+400+200")
 root.title("JOPA - Журнал Определения ПК Адресов")
 
@@ -45,7 +45,7 @@ class ScrollableLabelButtonFrame(CTkScrollableFrame):
 
 def parse_net():
     global iplist 
-    iplist = ScrollableLabelButtonFrame(master=root, width=300, command=lambda:makenote, corner_radius=0)
+    iplist = ScrollableLabelButtonFrame(master=root, width=430, command=lambda:makenote, corner_radius=0)
     ipadressen = {}
     def ping(ipadresse):
         
@@ -66,16 +66,15 @@ def parse_net():
             print("found one")
     print(alldevices)
     for i in range(0,len(alldevices)):
-        try:
+       
             f = open("notes.dat", mode="r+")
             for line in f:
                 if line != "\n":
                     if re.search(str(alldevices[i]),line):
-                        notestr = re.split(' ', line)[-1]
+                        notestr = line.split(' ',1)[1]
                     else : notestr = " - "
                     iplist.add_item(alldevices[i],notestr)
-        except Exception:
-            print("от этого ломается")
+        
     iplist.place(x=150,y=5,anchor=NW)
 
 
