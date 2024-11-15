@@ -61,15 +61,21 @@ def parse_net():
     for key, item in ipadressen.items():
         if not 'unreachable' in item.stdout.decode('utf-8') and 'failure' not in item.stdout.decode('utf-8'): #checks if there wasn't neither general failure nor 'unrechable host'
             alldevices.append(key)
-    for i in range(0,len(alldevices)):
+    for i in range(0,len(alldevices)-1):
         try:
-            f = open("notes.dat", mode="r+")
-            for line in f:
-                if line != "\n":
-                    if re.search(str(alldevices[i]),line):
-                        notestr = line.split(' ',1)[1]
-                    else : notestr = " - "
-                    iplist.add_item(alldevices[i],notestr)
+            iplist.remove_item
+        except Exception : continue
+        try:
+            f = open("notes.dat", mode="a+")
+            #for line in f:
+             #   if line != "\n":
+            f.seek(0)
+            lines = f.readlines()
+            line = lines[min(i,len(alldevices))]
+            if re.search(str(alldevices[i]),line):
+                notestr = line.split(' ',1)[1]
+            else : notestr = " - "
+            iplist.add_item(alldevices[i],notestr)
         except IOError:
             notestr = " - "
             iplist.add_item(alldevices[i],notestr)
@@ -81,7 +87,7 @@ def makenote(targetip):
     vari = ""
     
     def define(vari):
-        file = open("notes.dat",mode="w+")
+        file = open("notes.dat",mode="a+")
         vari=entrynote.get()
         file.write("\n" + str(targetip) + " " + vari)
         file.close()
