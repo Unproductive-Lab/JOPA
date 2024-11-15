@@ -44,13 +44,9 @@ class ScrollableLabelButtonFrame(CTkScrollableFrame):
                 return
 
 def parse_net():
-    print('TODO')
-    
-    
     global iplist 
     iplist = ScrollableLabelButtonFrame(master=root, width=300, command=lambda:makenote, corner_radius=0)
     ipadressen = {}
-    
     def ping(ipadresse):
         
         try:
@@ -84,7 +80,6 @@ def parse_net():
 
 
 def makenote(targetip):
-    print("TODO")
     vari = ""
     
     def define(vari):
@@ -108,9 +103,5 @@ def makenote(targetip):
 
 butt = CTkButton(root, text="Scan IPs", width=120, command=parse_net)
 butt.place(x=5,y=15,anchor=NW)
-
-
-
-
 
 root.mainloop()
