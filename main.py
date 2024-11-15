@@ -57,14 +57,11 @@ def parse_net():
     t = [kthread.KThread(target = ping, name = f"ipgetter{ipend}", args=(f'192.168.0.{ipend}',)) for ipend in range(255)] #prepares threads
     [kk.start() for kk in t] #starts 255 threads
     while len(ipadressen) < 255:
-        print('Searching network')
         sleep(.3)
     alldevices = []
     for key, item in ipadressen.items():
         if not 'unreachable' in item.stdout.decode('utf-8') and 'failure' not in item.stdout.decode('utf-8'): #checks if there wasn't neither general failure nor 'unrechable host'
             alldevices.append(key)
-            print("found one")
-    print(alldevices)
     for i in range(0,len(alldevices)):
         try:
             f = open("notes.dat", mode="r+")
@@ -87,7 +84,6 @@ def makenote(targetip):
     def define(vari):
         file = open("notes.dat",mode="w+")
         vari=entrynote.get()
-        print(vari)
         file.write("\n" + str(targetip) + " " + vari)
         file.close()
         toplevel.destroy()
