@@ -1,5 +1,4 @@
 from customtkinter import *
-import socket
 import kthread #pip install kthread
 from time import sleep
 import subprocess
